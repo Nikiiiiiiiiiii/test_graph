@@ -1,0 +1,36 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Trading
+    network: rinkeby
+    source:
+      address: "0x0AE461DD5bd9365817A3F8334EddCaF9B0C05C1B"
+      abi: Trading
+      startBlock: 10541331
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Trading
+      abis:
+        - name: Trading
+          file: ./abis/Trading.json
+      eventHandlers:
+        - event: NewOrder(indexed bytes32,indexed address,indexed bytes32,address,bool,uint256,uint256,bool)
+          handler: handleNewOrder
+        - event: NewStopOrder(indexed bytes32,indexed address,indexed bytes32,address,bool,uint64)
+          handler: handleNewStopOrder
+        - event: NewTakeOrder(indexed bytes32,indexed address,indexed bytes32,address,bool,uint64)
+          handler: handleNewTakeOrder
+        - event: ClosePosition(indexed bytes32,indexed address,indexed bytes32,address,bool,uint256,uint256,uint256,uint256,int256,bool)
+          handler: handleClosePosition
+        - event: PositionStopUpdated(indexed bytes32,indexed address,indexed bytes32,address,bool,uint64)
+          handler: handlePositionStopUpdated
+        - event: PositionTakeUpdated(indexed bytes32,indexed address,indexed bytes32,address,bool,uint64)
+          handler: handlePositionTakeUpdated
+        - event: PositionUpdated(indexed bytes32,indexed address,indexed bytes32,address,bool,uint256,uint256,uint256,uint256)
+          handler: handlePositionUpdated
+      file: ./src/trading.ts
