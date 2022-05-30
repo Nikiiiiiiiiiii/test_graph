@@ -117,8 +117,6 @@ export function handlePositionUpdated(event: PositionUpdated): void {
     orderSize = event.params.size
     orderMargin = event.params.margin
     position.fee = ZERO_BI
-    position.takePrice = ZERO_BI
-    position.stopPrice = ZERO_BI
     isNewPosition = true
   } else {
     orderSize = event.params.size.minus(position.size)

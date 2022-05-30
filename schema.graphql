@@ -122,6 +122,6 @@ type Pool @entity {
   
   id: ID! # 1
 
-  cumulativeFees: BigInt
+  cumulativeFees: BigInt!
 
 }
